@@ -1,28 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E9EEF3"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="#FFFDF7">
+    android:padding="24dp"
+    tools:context=".MenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:gravity="start">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/menu_back_button"
+            android:padding="4dp"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="#333333" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_coffee" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_title"
+            android:textColor="#151B26"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuSlot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menuPrev2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="#B6C2CF"
+            android:textSize="18sp"
+            tools:text="떡볶이" />
+
+        <TextView
+            android:id="@+id/menuPrev1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="#8A97A7"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            tools:text="돼지국밥" />
+
+        <TextView
+            android:id="@+id/currentMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="#000000"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            tools:text="밀면" />
+
+        <TextView
+            android:id="@+id/menuNext1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="#8A97A7"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            tools:text="돼지국밥" />
+
+        <TextView
+            android:id="@+id/menuNext2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:textColor="#B6C2CF"
+            android:textSize="18sp"
+            tools:text="떡볶이" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/menuText"
+        android:id="@+id/resultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="메뉴 슬롯 대기 중..."
-        android:textSize="28sp"
-        android:textColor="#333333"
-        android:visibility="gone"
-        android:padding="16dp" />
+        android:layout_marginBottom="20dp"
+        android:text="@string/menu_result_placeholder"
+        android:textColor="#151B26"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/recommendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="슬롯 돌리기 🎰"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#FFC107" />
-
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#2A7EF3"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="12dp"
+        android:text="@string/menu_recommend_button"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 </LinearLayout>
