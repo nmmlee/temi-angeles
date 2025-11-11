@@ -45,6 +45,7 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
         }
 
         doneButton.setEnabled(false);
+        doneButton.setText("사진 보러 가기");
 
         pictureGrid.setOnItemClickListener((parent, view, position, id) -> {
             adapter.toggleSelection(position);
@@ -52,11 +53,9 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
         });
 
         doneButton.setOnClickListener(v -> {
-            // 완료 버튼 클릭 시 로직 (예: 메인 화면으로 이동)
-            Intent intent = new Intent(PhotoTemiPictureSelectActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(PhotoTemiPictureSelectActivity.this, PhotoTemiResultActivity.class);
+            intent.putStringArrayListExtra("selected_images", adapter.getSelectedItems());
             startActivity(intent);
-            finish();
         });
     }
 
@@ -88,6 +87,16 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
                 }
             }
             return count;
+        }
+
+        public ArrayList<String> getSelectedItems() {
+            ArrayList<String> selectedItems = new ArrayList<>();
+            for (int i = 0; i < selectedPositions.size(); i++) {
+                if (selectedPositions.get(i)) {
+                    selectedItems.add(imageUris.get(i));
+                }
+            }
+            return selectedItems;
         }
 
         public int getCount() {
