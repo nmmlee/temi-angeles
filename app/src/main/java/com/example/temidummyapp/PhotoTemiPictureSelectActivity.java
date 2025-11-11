@@ -2,6 +2,8 @@ package com.example.temidummyapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -117,12 +121,35 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
                 imageView = (ImageView) convertView;
             }
 
-            imageView.setImageURI(Uri.parse(imageUris.get(position)));
+            Uri uri = Uri.parse(imageUris.get(position));
 
             if (selectedPositions.get(position)) {
-                imageView.setBackground(ContextCompat.getDrawable(context, R.drawable.blue_border));
+                try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
+                    Drawable imageDrawable = Drawable.createFromStream(inputStream, uri.toString());
+                    Drawable borderDrawable = ContextCompat.getDrawable(context, R.drawable.blue_border);
+
+                    if (imageDrawable != null && borderDrawable != null) {
+                        Drawable[] layers = {borderDrawable, imageDrawable};
+                        LayerDrawable layerDrawable = new LayerDrawable(layers);
+
+                        int borderWidth = (int) (4 * context.getResources().getDisplayMetrics().density); // 4dp border
+                        layerDrawable.setLayerInset(1, borderWidth, borderWidth, borderWidth, borderWidth);
+
+                        imageView.setBackground(null);
+                        imageView.setPadding(0, 0, 0, 0);
+                        imageView.setImageDrawable(layerDrawable);
+                    } else {
+                        imageView.setImageURI(uri);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    imageView.setImageURI(uri);
+                }
             } else {
+                imageView.setImageDrawable(null);
+                imageView.setImageURI(uri);
                 imageView.setBackground(null);
+                imageView.setPadding(0, 0, 0, 0);
             }
 
             return imageView;
