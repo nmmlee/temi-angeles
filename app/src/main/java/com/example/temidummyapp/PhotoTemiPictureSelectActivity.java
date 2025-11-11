@@ -4,16 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,6 +23,7 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
     private GridView pictureGrid;
     private ArrayList<String> imageUris;
     private ImageAdapter adapter;
+    private Button doneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
 
         pictureGrid = findViewById(R.id.picture_grid);
         Button retakeButton = findViewById(R.id.retake_button);
-        Button doneButton = findViewById(R.id.done_button);
+        doneButton = findViewById(R.id.done_button);
 
         imageUris = getIntent().getStringArrayListExtra("captured_images");
 
@@ -39,8 +41,11 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
             pictureGrid.setAdapter(adapter);
         }
 
+        doneButton.setEnabled(false);
+
         pictureGrid.setOnItemClickListener((parent, view, position, id) -> {
             adapter.toggleSelection(position);
+            doneButton.setEnabled(adapter.getSelectedItemCount() == 2);
         });
 
         retakeButton.setOnClickListener(v -> {
@@ -71,15 +76,27 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
         }
 
         public void toggleSelection(int position) {
+            if (getSelectedItemCount() >= 2 && !selectedPositions.get(position)) {
+                Toast.makeText(context, "2개까지만 선택할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             selectedPositions.set(position, !selectedPositions.get(position));
             notifyDataSetChanged();
+        }
+
+        public int getSelectedItemCount() {
+            int count = 0;
+            for (boolean selected : selectedPositions) {
+                if (selected) {
+                    count++;
+                }
+            }
+            return count;
         }
 
         public int getCount() {
             return imageUris.size();
         }
-
-
 
         public Object getItem(int position) {
             return imageUris.get(position);
@@ -93,7 +110,7 @@ public class PhotoTemiPictureSelectActivity extends AppCompatActivity {
             ImageView imageView;
             if (convertView == null) {
                 imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 900));
+                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 600));
                 imageView.setAdjustViewBounds(true);
                 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             } else {
