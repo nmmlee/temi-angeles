@@ -286,7 +286,7 @@
                         android:background="@drawable/button_unselected_selector"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="에너지신산"
+                        android:text="에너지신산업"
                         android:textColor="#2B87F4" />
 
                     <Button
@@ -334,7 +334,7 @@
                         android:background="@drawable/button_unselected_selector"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="차세대반도"
+                        android:text="차세대반도체"
                         android:textColor="#2B87F4" />
 
                     <Button
@@ -370,7 +370,7 @@
                         android:background="@drawable/button_unselected_selector"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="첨단소재나"
+                        android:text="첨단소재나노융합"
                         android:textColor="#2B87F4" />
 
                     <Button
@@ -382,7 +382,7 @@
                         android:background="@drawable/button_unselected_selector"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="차세대디스"
+                        android:text="차세대디스플레이"
                         android:textColor="#2B87F4" />
 
                     <Button
@@ -394,7 +394,7 @@
                         android:background="@drawable/button_unselected_selector"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="데이터보인"
+                        android:text="데이터보안활용융합"
                         android:textColor="#2B87F4" />
 
                     <Button
@@ -478,7 +478,7 @@
                         android:background="@drawable/button_unselected_selector"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="반도체소부"
+                        android:text="반도체소부장"
                         android:textColor="#2B87F4" />
 
                     <Button
