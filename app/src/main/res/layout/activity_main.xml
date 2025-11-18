@@ -11,17 +11,12 @@
     <!-- 상단 왼쪽: 관리자 연결 -->
     <TextView
         android:id="@+id/btn_admin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="관리자 연결"
-        android:textSize="14sp"
-        android:paddingHorizontal="18dp"
-        android:paddingVertical="8dp"
-        android:background="#DDE6F5"
-        android:textColor="#4A5A6A"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:background="@drawable/bg_red_dot"
+        android:contentDescription="admin"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -342,5 +337,17 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- 관리자 설정 패널 (초기 숨김) -->
+    <include
+        android:id="@+id/include_admin_panel"
+        layout="@layout/panel_admin_mapping"
+        android:visibility="gone"/>
+
+    <!-- 길찾기 맵 패널 (초기 숨김) -->
+    <include
+        android:id="@+id/include_map_panel"
+        layout="@layout/panel_map_navigation"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
