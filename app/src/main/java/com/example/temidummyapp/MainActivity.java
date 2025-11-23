@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
         androidx.recyclerview.widget.RecyclerView rv = (androidx.recyclerview.widget.RecyclerView) rvv;
         rv.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
         java.util.ArrayList<String> ids = new java.util.ArrayList<>();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 21; i++) {
             ids.add(String.format(java.util.Locale.US, "btn_%02d", i));
         }
         java.util.List<String> temiLocations = getTemiLocationsSafe();
@@ -271,6 +271,8 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
 
     private void showMapPanel() {
         if (mapPanel != null) {
+            // 실행 시에는 기본적으로 투명하게 (윤곽 OFF)
+            debugOutline = false;
             mapPanel.setVisibility(View.VISIBLE);
             applyDebugOutline();
             ensureMapBitmapLoaded();
@@ -299,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
                 startNavigation(location);
             }
         };
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 21; i++) {
             String idName = String.format(java.util.Locale.US, "btn_%02d", i);
             int id = getResources().getIdentifier(idName, "id", getPackageName());
             if (id != 0) {
@@ -314,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
         int debugBg = debugOutline ? 0x3333AAFF : android.graphics.Color.TRANSPARENT;
         View container = mapPanel.findViewById(R.id.map_container);
         if (container == null) container = mapPanel;
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 21; i++) {
             String idName = String.format(java.util.Locale.US, "btn_%02d", i);
             int id = getResources().getIdentifier(idName, "id", getPackageName());
             if (id != 0) {
