@@ -76,6 +76,12 @@
             android:exported="false"
             android:screenOrientation="landscape" />
 
+        <!-- ✅ GPT 채팅 Activity 등록 -->
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+
         <!-- ✅ Temi Skill 등록 (이 부분 추가) -->
         <meta-data
             android:name="com.robotemi.sdk.metadata.SKILL"

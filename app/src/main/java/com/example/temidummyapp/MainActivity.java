@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
     private View mapPanel; // 길찾기 맵 패널 루트
     private boolean debugOutline = false;
     private boolean mapBitmapLoaded = false;
+    private ImageView character; // 챗봇 아이콘
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
                     @Override
                     public void onClick(View v) {
                         adminPanel.setVisibility(View.GONE);
+                        showCharacterIcon(); // 관리자 패널 닫을 때 챗봇 아이콘 다시 표시
                     }
                 });
             }
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
                 @Override
                 public void onClick(View v) {
                     mapPanel.setVisibility(View.GONE);
+                    showCharacterIcon(); // 맵 패널 닫을 때 챗봇 아이콘 다시 표시
                 }
             };
             if (close != null) close.setOnClickListener(hide);
@@ -162,6 +165,18 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
                 startActivity(intent);
             }
         });
+
+        // 우하단 캐릭터(챗봇) 아이콘 클릭 → 채팅 화면 이동
+        character = findViewById(R.id.character);
+        if (character != null) {
+            character.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void showAdminPinDialog() {
@@ -222,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
         if (adminPanel != null) {
             setupAdminRecycler();
             adminPanel.setVisibility(View.VISIBLE);
+            hideCharacterIcon(); // 관리자 패널 표시 시 챗봇 아이콘 숨기기
         } else {
             Toast.makeText(this, "관리자 패널을 표시할 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
@@ -276,6 +292,7 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
             mapPanel.setVisibility(View.VISIBLE);
             applyDebugOutline();
             ensureMapBitmapLoaded();
+            hideCharacterIcon(); // 맵 패널 표시 시 챗봇 아이콘 숨기기
         } else {
             // 폴백: 기존 위치 선택 다이얼로그
             showLocationPicker();
@@ -517,6 +534,20 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
                 robot.speak(tts);
                 robot.goTo(currentDestination);
             });
+        }
+    }
+
+    // 챗봇 아이콘 숨기기
+    private void hideCharacterIcon() {
+        if (character != null) {
+            character.setVisibility(View.GONE);
+        }
+    }
+
+    // 챗봇 아이콘 표시하기
+    private void showCharacterIcon() {
+        if (character != null) {
+            character.setVisibility(View.VISIBLE);
         }
     }
 }
