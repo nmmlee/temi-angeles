@@ -184,6 +184,18 @@ public class MainActivity extends AppCompatActivity implements OnGoToLocationSta
                 }
             });
         }
+
+        // [1124] 하민용 임시 작업 textViewWeMeet 클릭 → QR 안내 화면 이동
+        TextView textViewWeMeet = findViewById(R.id.textViewWeMeet);
+        if (textViewWeMeet != null) {
+            textViewWeMeet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, EventQRActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void showAdminPinDialog() {
